@@ -1,11 +1,13 @@
 const express = require('express')
+const cors = require('cors')
 require('colors')
 
 const server = express()
 server.use(express.json())
-server.use((req, res, next) => {
+server.use(cors())
+server.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Header', 'Content-Type')
+  res.header('Access-Control-Allow-Headers', 'Content-Type')
   next()
 })
 
@@ -13,9 +15,26 @@ const path = '/api/creators/'
 
 server.get(path, async (req, res) => {
   const creators = [
-    { name: 'Code Drip', img: 'https://' },
-    { name: 'Bruce Lee', img: 'https://' },
-    { name: 'Code Shock', img: 'https://' },
+    {
+      name: 'Code Dripper',
+      img:
+        'https://images.unsplash.com/photo-1605718666382-4eb9bd7e1961?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+    },
+    {
+      name: 'Bruce Lee',
+      img:
+        'https://images.unsplash.com/photo-1605718666382-4eb9bd7e1961?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+    },
+    {
+      name: 'Code Shock',
+      img:
+        'https://images.unsplash.com/photo-1605718666382-4eb9bd7e1961?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+    },
+    {
+      name: 'BooYah',
+      img:
+        'https://images.unsplash.com/photo-1605718666382-4eb9bd7e1961?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80',
+    },
   ]
   // todo: GET from db
   res.status(200).json(creators)

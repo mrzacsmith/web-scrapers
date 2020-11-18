@@ -12,9 +12,9 @@
 
       .card {
         margin: 10px;
-        padding: 10px;
+        padding: 15px;
         /* background: blue; */
-        border: 1px solid goldenrod;
+        border: 1px solid red;
         border-radius: 5px;
       }
     </style>
@@ -28,7 +28,13 @@
     <script>
       const submitChannel = () => {
         const channelValue = document.querySelector('.channel-input').value
-        console.log(channelValue)
+        fetch('http://localhost:5000/api/creators', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ channelValue }),
+        })
       }
 
       const newEl = (type, attrs = {}) => {
