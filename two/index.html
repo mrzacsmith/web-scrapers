@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>full stack web scraper</title>
+    <style>
+      .container {
+        display: flex;
+        /* background: orange; */
+      }
+
+      .card {
+        margin: 10px;
+        padding: 10px;
+        /* background: blue; */
+        border: 1px solid goldenrod;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Set up demo</h1>
+    <h4>Add new creator</h4>
+    <input class="channel-input" type="text" placeholder="paste YouTube url" />
+    <button type="submit" onclick="submitChannel()">submit</button>
+    <div class="container"></div>
+    <script>
+      const submitChannel = () => {
+        const channelValue = document.querySelector('.channel-input').value
+        console.log(channelValue)
+      }
+
+      const newEl = (type, attrs = {}) => {
+        const el = document.createElement(type)
+
+        for (let attr in attrs) {
+          const value = attrs[attr]
+          if (attr == 'innerText') el.innerText = value
+          else el.setAttribute(attr, value)
+        }
+        return el
+      }
+
+      const loadCreators = async () => {
+        const res = await fetch('http://localhost:5000/api/creators/')
+        const creators = await res.json()
+
+        const ctr = document.querySelector('.container')
+
+        creators.forEach((creator) => {
+          const card = newEl('div', { class: 'card' })
+          const title = newEl('h3', { innerText: creator.name })
+          const img = newEl('img', { src: creator.img })
+          card.appendChild(title)
+          card.appendChild(img)
+          ctr.appendChild(card)
+        })
+      }
+
+      loadCreators()
+    </script>
+  </body>
+</html>
