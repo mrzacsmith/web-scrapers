@@ -6,7 +6,7 @@ const scrapeChannel = async (url) => {
   const page = await browser.newPage()
   await page.goto(url)
 
-  const [el] = await page.$x('//*[@id="text"]')
+  const [el] = await page.$x('//*[@id="subscriber-count"]')
   const text = await el.getProperty('textContent')
   const name = await text.jsonValue()
 
@@ -15,9 +15,11 @@ const scrapeChannel = async (url) => {
   const avatarUrl = await src.jsonValue()
 
   browser.close()
-  console.log({ name, avatarUrl })
+  // console.log({ name, avatarUrl })
 
   return { name, avatarUrl }
 }
 
-scrapeChannel('https://www.youtube.com/channel/UCRLEADhMcb8WUdnQ5_Alk7g')
+module.exports = {
+  scrapeChannel,
+}
