@@ -13,4 +13,17 @@ const client = new Twitter({
 
 // send tweet
 
+client.post(
+  'statuses/update',
+  {
+    status:
+      'JS Bytes will share short code snippets to learn best practices in #javascript #nodejs',
+  },
+  function (error, tweet, response) {
+    if (error) throw error
+    console.log(tweet)
+    console.log(response)
+  }
+)
+
 // remove tweet from spreadsheet
