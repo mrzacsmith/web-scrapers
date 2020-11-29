@@ -45,7 +45,7 @@ const copyTweet = async (status) => {
   )
   await doc1.useServiceAccountAuth(require('./creds.json'))
   await doc1.loadInfo()
-  console.log(doc1.title)
+  // console.log(doc1.title)
 
   const sht = doc1.sheetsByIndex[0]
   const addBckup = await sht.addRow({ code_bytes: status })
